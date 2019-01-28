@@ -16,7 +16,7 @@ public int test(int x, int y){
       return x+y;               =>  (x, y) -> x+y
 }                                                                                      
 ```
-return이 있을경우 {}는 생략 불가능 하다.
+***Note*** return이 있을경우 {}는 생략 불가능 하다.
 
 #### @FunctionalInterface
 
@@ -28,13 +28,13 @@ return이 있을경우 {}는 생략 불가능 하다.
 
 ```
 @FunctionalInterface
-Interface Test{
+Interface Func{
     int test(int x, int y);
 }
 
-Class Main{
-  main(String[] args){
-      Test rambda = (x,y)->x+y;
+public class Lambda1{
+  public static void main(String[] args){
+      Func rambda = (x,y)->x+y;
       System.out.println(rambda.test(1, 2));
   }
 }
@@ -96,6 +96,71 @@ public class Rambda2 {
  * 3 입니다
  * false
  ***********/
+```
+#### Map, List, Set
+
+- forEach를 위한 lambda 메소드 추가
+
+#### 사용법
+
+```
+ public class Lambda3 {
+
+    public static void main(String[] args) {
+
+        List<String> list = new LinkedList<>();
+
+        list.add("1");
+        list.add("2");        
+	list.add("3");
+
+
+        for(String str : list) System.out.println(str);
+        // 일반 list forEach문
+
+
+        list.forEach(i->System.out.println(i));
+        // List Lambda forEach문 [Consumer]
+
+        Map<Integer, String> map = new HashMap<>();
+
+        map.put(1, "1번");
+        map.put(2, "2번");
+        map.put(3, "3번");
+ 
+
+        map.forEach((key,value)-> System.out.println("key : "+key+" value : "+value));
+        // Map Lambda forEach[BiConsumer]
+
+        Set<String> set = new HashSet<>();
+
+        set.add("가");
+        set.add("나");
+        set.add("다");
+
+        set.forEach(i->System.out.println(i));
+
+        // Set Lambda forEach문 [Consumer]
+
+    }
+
+    /****출력****
+     * 1
+     * 2
+     * 3
+     * 1
+     * 2
+     * 3
+     * key : 1 value : 1번
+     * key : 2 value : 2번
+     * key : 3 value : 3번
+     * 가
+     * 다
+     * 나
+     ***********/
+
+ }
+
 ```
 
 #### 참고
