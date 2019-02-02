@@ -1,24 +1,24 @@
 # Lambda
 
-### 정의
+## 정의
 자바8부터 추가된 함수형 언어 표현식
 
-### 특징
+## 특징
 
 * 메서드를 하나의 식으로 표현(Anonymous function)
 * 기존의 자바보다 간결한 표현 가능
 * 메서드 이름, 매개변수 자료형, 반환형을 생략하여 표현
 
-#### 기본 표현법
+### 기본 표현법
 
 ```
 public int test(int x, int y){      
       return x+y;               =>  (x, y) -> x+y
 }                                                                                      
 ```
-***Note*** return이 있을경우 {}는 생략 불가능 하다.
+***Note:*** return이 있을경우 {}는 생략 불가능 하다.
 
-#### @FunctionalInterface
+### @FunctionalInterface
 
 * 함수형 메소드를 사용하기 위해서는 인터페이스가 필요하다.
 * Interface 위에 위의 어노테이션을 붙이면 컴파일러가 함수형 언어를 표현을 확인해준다.
@@ -40,19 +40,19 @@ public class Lambda1{
 }
 ```
 
-####  java.util.function 패키지
+###  java.util.function 패키지
 - 이 패키지에는 Lambda 식을 위한 함수형 Interface 있다.
 - `Supplier`, `Consumer`, `Function`, `Predicate`  (매개변수 1개 이하)
 - `BiConsumer`, `BiFunction`, `BiPredicate` (매개변수 2개)
 
 | Interface 이름 | 매개변수 | 반환형 |
 | :-------- | -------- | :-------- |
-| Supplier | 없음  | Object |
+| Supplier | <center>-</center>  | Object |
 | Consumer | Object1 | void |
 | Function | Object1, Object2 | Object2 |
 | Predicate | Object1 | boolean |
 | BiConsumer | Object1, Object2 | void |
-| BiFunction | Object1, Object2, Object3 | Object3 |
+| BiFunction | Object1, Object2, Object | Object3 |
 | BiPredicate | Object1, Object2 | boolean |
 
 
@@ -97,7 +97,7 @@ public class Rambda2 {
  * false
  ***********/
 ```
-#### Map, List, Set
+### Map, List, Set
 
 - forEach를 위한 lambda 메소드 추가
 
@@ -127,7 +127,7 @@ public class Rambda2 {
         map.put(1, "1번");
         map.put(2, "2번");
         map.put(3, "3번");
- 
+
 
         map.forEach((key,value)-> System.out.println("key : "+key+" value : "+value));
         // Map Lambda forEach[BiConsumer]
@@ -158,11 +158,11 @@ public class Rambda2 {
      * 다
      * 나
      ***********/
-
  }
 
 ```
+#### 링크
+- [Stream](#Stream)
 
 #### 참고
 - Java의 정석 3rd Edition
-
