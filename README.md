@@ -162,7 +162,7 @@ public class Rambda2 {
 
 ```
 #### 링크
-- [Stream](#Stream)
+- [Stream](https://github.com/KangSeongHyo/Lambda/blob/master/Stream.md)
 
 #### 참고
 - Java의 정석 3rd Edition

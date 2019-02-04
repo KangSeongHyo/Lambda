@@ -36,12 +36,15 @@ public class Stream1 {
 		list.stream().forEach(System.out::print);
 		long Stream_end = System.currentTimeMillis();
 
-		System.out.println( "\n Stream 실행 시간 : " + (Stream_end-stream_start)+"ms");
+		System.out.println( "\n Stream 실행 시간 : "
+		 											+ (Stream_end-stream_start)+"ms");
+
 		long parallelstream_start = System.currentTimeMillis();
 		list.parallelStream().forEach(System.out::print);
 		long parallelstream_end = System.currentTimeMillis();
 
-		System.out.println( "\n ParallelStream 실행 시간 : " + (parallelstream_end-parallelstream_start)+"ms");
+		System.out.println( "\n ParallelStream 실행 시간 : "
+												+ (parallelstream_end-parallelstream_start)+"ms");
 
 	}
 }
@@ -145,6 +148,8 @@ public class Stream3 {
 	 ***********/
 }
 ```
+#### 링크
+- [Stream2](https://github.com/KangSeongHyo/Lambda/blob/master/Stream2.md)
 
 #### 참고
 - Java의 정석 3rd Edition
