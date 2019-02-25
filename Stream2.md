@@ -55,7 +55,7 @@ public class Stream4 {
 - `.iterate()` 는 seed 값을 통해서 누적으로 연산을 진행한다.
 - `.generate()` 는 단순히 내용을 반복한다. 매개변수가 없고 반환형만을 가지는 형태이다.
 
-####사용법
+#### 사용법
 ```
 public class Etc1 {
 	public static void main(String[] args) {
@@ -76,6 +76,8 @@ public class Etc1 {
 }
 ```
 
+#### 링크
+- [JAVA8 in Action_Part1](/JAVA8_in_Action_공부/Part1.md)
 
 #### 참고
 - Java의 정석 3rd Edition

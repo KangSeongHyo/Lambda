@@ -163,6 +163,7 @@ public class Rambda2 {
 ```
 #### 링크
 - [Stream](https://github.com/KangSeongHyo/Lambda/blob/master/Stream.md)
+- [JAVA8 in Action_Part1](/JAVA8_in_Action_공부/Part1.md)
 
 #### 참고
 - Java의 정석 3rd Edition

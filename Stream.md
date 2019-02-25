@@ -37,22 +37,22 @@ public class Stream1 {
 		long Stream_end = System.currentTimeMillis();
 
 		System.out.println( "\n Stream 실행 시간 : "
-		 											+ (Stream_end-stream_start)+"ms");
+		+ (Stream_end-stream_start)+"ms");
 
 		long parallelstream_start = System.currentTimeMillis();
 		list.parallelStream().forEach(System.out::print);
 		long parallelstream_end = System.currentTimeMillis();
 
 		System.out.println( "\n ParallelStream 실행 시간 : "
-												+ (parallelstream_end-parallelstream_start)+"ms");
+		+ (parallelstream_end-parallelstream_start)+"ms");
 
 	}
 }
 /****출력****
  * 12345678
- *  Stream 실행 시간 : 57ms
+ * Stream 실행 시간 : 57ms
  * 65784132
- * 	ParallelStream 실행 시간 : 5ms
+ * ParallelStream 실행 시간 : 5ms
  ***********/
 ```
 ***Note:*** 기존처럼 Thread 객체를 생성할 필요없이 선언만으로 간결한 병렬처리 가능
