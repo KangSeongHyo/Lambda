@@ -1,6 +1,7 @@
 # JAVA8 in Action - part1
 
 ## Chapter 1 - JAVA8 이란
+
 ### 1.1.1 JAVA8 특징
 - JAVA8에서 간단한 병렬처리를 제공한다.
     > 기존에는 CPU 코어를 멀티로 활용하려면 Thread 객체 이용했지만 관리가 어렵다는 단점이 있다.
@@ -61,6 +62,87 @@
 ### 1.4 디폴트 메서드
 - JAVA8은 구현하지 않아도 되는 메서드를 인터페이스가 포함할 수 있는 기능을 제공한다.
 - 디폴트 메서드를 포함한 여러 인터페이스를 활용하면 다중상속과 비슷한 기능을 사용할 수 있다.
+
+## Chapter 2 - 동작파라미터화
+
+### 2.1.1 요구사항에 대응하기
+- 소비자의 요구는 항상 바뀔 수 있기 때문에 이러한 변화에 대응하기에 동작파라미터화가 필요하다.
+- 동작파라미터화는 어떻게 실행할건지 결정하지 않은 코드블록을 의미한다.
+- 위의 코드블록을 메서드의 인수로 전달되기 때문에 받은 메서드에서 코드블록은 파라미터화 된다.
+
+### 2.1.2 농부의 변덕
+- 농부가 처음에 사과를 원했다가 과일종류를 원하고 또 무게를 원하기도 하고 둘다 원하기까지 한다.
+- 이런 코드를 짤때 중요한것은 DRY(Don't Repeat Yourself) 해야 한다.
+
+### 2.2.1 동작파라미터화
+- 속성에 기초하여 boolean 값을 반환하는 Predicate를 구현하고 인수로 이를 파라미터로 넘긴다.
+- 이를 활용하면 한개의 파라미터로 여러 동작이 가능해 유연한 코드를 만들 수 있다.
+
+  ```
+      public static void main(String[] args) {
+
+          List<Student> list = Arrays.asList(new Student(25, "김철수", "남"),
+                             new Student(22, "최영희", "여"),
+                             new Student(23, "임지현", "여"));
+
+          StdntPredicate manPredicate = new ManPredicate();
+          StdntPredicate agePredicate = new AgePredicate();
+
+          System.out.println(find(list, manPredicate));
+          System.out.println(find(list, agePredicate));
+
+        }
+
+       public static Student find(List<Student> list, StdntPredicate sp) {
+
+            for(Student stu : list) {
+              if(sp.isSame(stu)) {
+                return stu;
+              }
+            }
+
+          return null;
+       }
+
+      interface StdntPredicate{
+          boolean isSame(Student stu);
+      }
+
+      class ManPredicate implements StdntPredicate{
+          @Override
+          public boolean isSame(Temp.Student stu) {
+            if(stu.gender.equals("남")) return true;
+            return false;
+           }
+      }
+
+      class AgePredicate implements StdntPredicate{
+        @Override
+        public boolean isSame(Temp.Student stu) {
+          if(stu.age == 23) return true;
+          return false;
+        }
+     }
+
+     /*** 실행결과 ***/
+     [age=25, name=김철수, gender=남]
+     [age=23, name=임지현, gender=여]
+
+  ```
+
+### 2.3.1 복잡한 과정 간소화
+- 위의 코드는 새로운 동작을 만들기 위해서는 각각의 클래스를 만들어서 인스턴스화하는 번거로움이 있다.
+- 이를 해결하는 클래스 선언과 인스턴스화를 동시에 할 수 있는 익명클래스는 장황한 단점이 있다.
+- 람다 표현식을 사용하면 위의 코드를 간결하게 나타낼 수 있다.
+  ```
+    System.out.println(find(list, (Student stu)->stu.gender.equals("남")));
+    System.out.println(find(list, (Student stu)->stu.age == 23));
+
+    /*** 실행결과 ***/
+    [age=25, name=김철수, gender=남]
+    [age=23, name=임지현, gender=여]
+
+  ```
 
 #### 출처
 - Java8 in Action
