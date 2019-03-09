@@ -235,7 +235,7 @@
 - compose는 나중에 정의된 람다식의 결과를 먼저 정의된 람다식의 인수로 사용한다.(f(g(x)))
 
 #### 링크
-- [part2](/part2)
+- [Part2](/Part2)
 
 #### 출처
 - Java8 in Action
