@@ -83,13 +83,13 @@
 
     List<Stream<int[]>> res= list.stream()
       .map(i-> list2.stream()
-              .map(j->new int[] {i,j}))
+                    .map(j->new int[] {i,j}))
       .collect(Collectors.toList());
       // map일 경우
 
     List<int[]> res2= list.stream()
         .flatMap(i-> list2.stream()
-            .map(j->new int[] {i,j}))
+                          .map(j->new int[] {i,j}))
         .collect(Collectors.toList());
       // flatMap일 경우
   ```
@@ -106,3 +106,74 @@
 - ``reduce`` 의 장점
   * 내부 구현으로 병렬화 처리를 할 수 있다.
 - ``sorted`` 같은 메서드는 과거 이력을 버퍼에 담아야하므로 모든 요소를 버퍼에 추가해야된다.(stateful operation)
+
+### 5.5 실전 연습
+```
+   //2011년에 일어난 모든 트랜잭션 값을 찾아 오름차순으로 출력
+   transactions.stream()
+               .filter(trn-> trn.getYear()==2011)
+               .sorted((x,y)->Integer.compare(x.getValue(),y.getValue()))
+               .forEach(str-> System.out.println(str.toString()));
+               Comparator.comparing(Transaction::getValue);
+
+   // 근무하는 도시를 중복없이 출력
+   transactions.stream()
+               .map(str->str.getTrander().city)
+               .distinct()
+               .forEach(str-> System.out.println(str));
+
+   // 케임브릿지 근무자 찾아 이름순 정렬
+   transactions.stream()
+               .filter(str->str.getTrander().city.equals("camb"))
+               .sorted((a,b)->(a.getTrander().name.compareTo(b.getTrander().name)))
+               .forEach(str-> System.out.println(str));
+
+   // 밀라노에 거래자 있는지?
+   transactions.stream()
+               .anyMatch(tran->tran.getTrander().getCity().equals("mian"));
+
+   // 전체 트랜잭션 최솟값
+   transactions.stream()
+               .mapToInt(Transaction::getValue)
+               .min()
+               .getAsInt();
+
+   transactions.stream()
+               .mapToInt(Transaction::getValue)
+               .reduce(Integer::min)
+               .getAsInt();
+
+   transactions.stream()
+               .min(Comparator.comparing(Transaction::getValue))
+               .get()
+               .getValue();
+
+```
+
+### 5.6.1 기본형 스트림
+- ``map`` 으로 스트림을 생성할 경우 ``sum`` , ``min`` 등은 직접 호출할 수 없다.
+- 그래서 기본형 스트림을 제공한다. ``IntStream`` , ``mapToDouble`` 등
+- 기본형 스트림을 다시 스트림으로 바꾸려면 ``boxed`` 를 사용하면 된다.
+
+### 5.6.2 숫자범위
+- ``range``, ``rangeClosed`` 지원하고 각각 n제외, n포함이다.
+
+### 5.7.1 스트림 만들기
+- ``Stream.of`` 를 사용하면 값으로 스트림을 만들 수 있다. ``Stream.empty`` 로 비울 수 있다.
+- ``iterator`` , ``generate`` 로 무한스트림을 생성할 수 있다.
+- ``iterator`` 는 요청할 떄 마다 값을 생성할 수 있고 언바운드 스트림이라고 부른다.
+- ``generate`` 는 값을 연속적으로 계산하지 않는다. 불변상태를 유지하고 싶을때 사용한다.(상태저장이 없다)
+- 무한스트림의 요소는 무한적으로 계산이 반복되기 때문에 정렬이나 리듀스 할 수 없다.
+- 피보나치 수열
+  ```
+  Stream.iterate(new int[]{0,1},arr->new int[]{arr[1],arr[0]+arr[1]})
+             .limit(10)
+             .map(arr->arr[0]) // 각요소 중 첫번째 요소
+             .forEach(System.out::println);
+  ```
+
+#### 링크
+- [part1](/part1)
+
+#### 출처
+- Java8 in Action
