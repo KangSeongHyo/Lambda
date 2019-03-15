@@ -54,10 +54,9 @@
 - ``map`` 과 ``flatMap`` 을 통해 특정데이터를 **선택** 하는 작업을 할 수 있다.
 
 ### 5.2.1 스트림의 각 요소에 함수 적용하기
-- ``map`` 은 '새로운 버전'을 만든다라는 변환에 가까운 매핑이다.
-- 출력으로 스트림형태 Stream<Object> 형식을 가진다.
+- ``map`` 은 새로운 버전을 만든다 라는 변환에 가까운 매핑이다.
+- 출력으로 스트림형태 Stream 형식을 가진다.
 - ``map`` 은 다른 ``map`` 과 연결이 가능하다.
-
 
 ### 5.2.2 스트림 평면화
 - "hello" , "world" 을 중복없이 쓰인 알파벳을 구하는 예제
@@ -244,8 +243,8 @@
 					.collect(
 						groupingBy(Dish::getType,
 						collectingAndThen(
-								minBy(Comparator.comparingInt(Dish::getCalories)),
-								Optional::get)));
+						  minBy(Comparator.comparingInt(Dish::getCalories)),
+						  Optional::get)));
 		// collectingAndThen는 인수로 Comparator, 결과 두개를 받는다.
     // Type으로 분류-> 각각의 서브스트림 -> collectingAndThen
   ```
